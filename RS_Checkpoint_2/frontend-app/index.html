@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>mBanking</title>
+  <style>
+    body { font-family: Arial; background:#f4f6f8; margin:0; padding:18px; }
+    .wrap { max-width: 900px; margin: 0 auto; display:grid; gap:16px; grid-template-columns: 1fr 1fr; }
+    .card { background:#fff; padding:18px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+    h3 { margin:0 0 12px 0; }
+    input { width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; margin:6px 0 10px 0; box-sizing:border-box; }
+    button { padding:10px; border:none; border-radius:8px; cursor:pointer; font-weight:700; }
+    .primary { background:#ffd200; width:100%; }
+    .secondary { background:#eee; width:100%; }
+    .balance { font-size:28px; font-weight:800; }
+    .status { color:#555; font-size:12px; margin-top:8px; }
+    .list { margin-top:10px; max-height: 240px; overflow:auto; }
+    .rowitem { display:grid; grid-template-columns: 1.3fr 1fr 0.7fr; padding:10px 0; border-bottom:1px solid #f0f0f0; gap:10px; font-size:13px; }
+    .amt { text-align:right; font-weight:800; }
+    .full { grid-column: 1 / -1; }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="card">
+    <h3>Login</h3>
+    <label>Username</label>
+    <input id="username" placeholder="user" value="user" />
+    <label>Password</label>
+    <input id="password" type="password" placeholder="pass" value="pass" />
+    <button class="primary" onclick="login()">Login</button>
+    <div id="status" class="status">Not logged in.</div>
+  </div>
+
+  <div class="card">
+    <h3>Accounts</h3>
+    <div id="accounts"></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px;">
+      <button class="primary" onclick="loadAccounts()">Refresh</button>
+      <button class="secondary" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="card">
+  <h3>Transfer</h3>
+
+  <label>From account</label>
+  <select id="fromAccount" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; margin:6px 0 10px 0;">
+    <option value="1">User</option>
+    <option value="2">Savings</option>
+  </select>
+
+  <label>To account</label>
+  <select id="toAccount" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; margin:6px 0 10px 0;">
+    <option value="2">Savings</option>
+    <option value="1">User</option>
+  </select>
+
+  <label>Amount (EUR)</label>
+  <input id="transferAmount" type="number" placeholder="50" value="50" />
+
+  <button class="primary" onclick="doTransfer()">Send transfer</button>
+</div>
+
+  <div class="card">
+    <h3>Pay bill</h3>
+    <label>Biller</label>
+    <input id="biller" placeholder="HEP / Water / Internet" value="HEP" />
+    <label>Amount (EUR)</label>
+    <input id="billAmount" type="number" placeholder="20" value="20" />
+    <button class="primary" onclick="payBill()">Pay</button>
+  </div>
+
+  <div class="card full">
+  <h3>Activity</h3>
+  <button class="secondary" onclick="loadActivity()">Load activity</button>
+  <div id="activity" class="list"></div>
+</div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
